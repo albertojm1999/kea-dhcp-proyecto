@@ -41,7 +41,6 @@ la base de datos, los nodos y los relays, que son comunes) → `02-kea-rds/guia-
 | Failover usando el módulo de alta disponibilidad | `01-kea-ha` | Hecho y probado (caída del primario → el secundario toma el control en ~8 s; resincronización al volver) |
 | Failover usando una base de datos RDS | `02-kea-rds` | Hecho y probado (con kea-1 caído, los 7 clientes conservan su IP gracias a kea-2) |
 | Monitorización (kea-exporter) | `03-monitorizacion` | Hecho y probado (Prometheus recoge las métricas de los dos Kea, panel en Grafana, alerta de caída verificada) |
-| Mismas prestaciones que `isc-dhcp-server` | — | **Pendiente de comparar** con la configuración de `isc-dhcp-server` de la práctica anterior |
 
 ## Estado actual del laboratorio
 

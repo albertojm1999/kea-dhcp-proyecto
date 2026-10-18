@@ -1,0 +1,23 @@
+# Reglas de alerta (visibles en Prometheus -> Alerts)
+groups:
+  - name: kea
+    rules:
+      - alert: KeaServidorCaido
+        expr: up{job="kea"} == 0
+        for: 30s
+        labels: { severity: critical }
+        annotations:
+          summary: "{{ $labels.servidor }} ({{ $labels.instance }}) no responde"
+      - alert: KeaPoolCasiLleno
+        expr: |
+          max by (subnet) (kea_dhcp4_addresses_assigned_total{pool!=""})
+            / max by (subnet) (kea_dhcp4_addresses_total{pool!=""}) > 0.8
+        for: 1m
+        labels: { severity: warning }
+        annotations:
+          summary: "Pool de {{ $labels.subnet }} por encima del 80 %"
+      - alert: KeaDireccionesDeclinadas
+        expr: increase(kea_dhcp4_addresses_declined_total[10m]) > 0
+        labels: { severity: warning }
+        annotations:
+          summary: "Clientes declinando direcciones en {{ $labels.subnet }} (posible IP duplicada)"

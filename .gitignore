@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# Configuración con contraseñas reales (no subir)
+*.local.conf
+.env
